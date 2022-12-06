@@ -162,6 +162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   turnSpeed: 100
+  stability: 0.3
+  stabilizationSpeed: 2
 --- !u!114 &3567398390112688918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +177,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotForce: 10
+  reloadTime: 1
   barrelMuzzle: {fileID: 295953450}
+  canShoot: 1
 --- !u!1 &1387851389626632545
 GameObject:
   m_ObjectHideFlags: 0
