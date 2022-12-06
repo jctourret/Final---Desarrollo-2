@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class Proyectile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] int damage;
+    [SerializeField] float lifeTime = 2.0f;
 
-    // Update is called once per frame
-    void Update()
+    float lifeTimer;
+    private void Update()
     {
-        
+        if(lifeTimer< lifeTime)
+        {
+            lifeTimer += Time.deltaTime;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        IDamageable damageable;
+        if(collision.collider.TryGetComponent(out damageable))
+        {
+            damageable.TakeDamage(damage);
+        }
+        Destroy(gameObject);
     }
 }
