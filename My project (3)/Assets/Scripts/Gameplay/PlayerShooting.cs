@@ -25,16 +25,6 @@ public class PlayerShooting : MonoBehaviour
         if (canShoot && Input.GetButtonDown("Fire1"))
         {
             StartCoroutine(Shoot());
-            //Ray screenRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-            //RaycastHit hit;
-            //if(Physics.Raycast(screenRay, out hit))
-            //{
-            //    float targetAngle = Vector3.Angle(transform.forward,hit.point-transform.position);
-            //    float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            //    transform.rotation = Quaternion.Euler(0f,angle,0f);
-            //    Debug.Log(hit.collider.name);
-            //}
-           
             canShoot = false;
         }
         else
@@ -52,27 +42,28 @@ public class PlayerShooting : MonoBehaviour
     {
         Ray screenRay = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        Physics.Raycast(screenRay, out hit);
-        Debug.Log(hit.collider.name);
-
-        Vector3 targetVector = hit.point - transform.position;
-        targetVector.y = 0f;
-        Quaternion startRotation = transform.rotation;
-        var finalRotation = Quaternion.LookRotation(targetVector);
-        var t = 0f;
-        while (t <= 1f)
+        if(Physics.Raycast(screenRay, out hit))
         {
-            t += Time.deltaTime / turnTime;
-            transform.rotation = Quaternion.Lerp(startRotation, finalRotation, t);
-            yield return null;
-        }
-        transform.rotation = finalRotation;
 
-        Rigidbody bulletRb;
-        GameObject go = Instantiate(bullet, barrelMuzzle.position, Quaternion.identity, null);
-        if (go.TryGetComponent(out bulletRb))
-        {
-            bulletRb.AddForce(transform.forward * shotForce, ForceMode.Impulse);
+            Vector3 targetVector = hit.point - transform.position;
+            targetVector.y = 0f;
+            Quaternion startRotation = transform.rotation;
+            var finalRotation = Quaternion.LookRotation(targetVector);
+            var t = 0f;
+            while (t <= 1f)
+            {
+                t += Time.deltaTime / turnTime;
+                transform.rotation = Quaternion.Lerp(startRotation, finalRotation, t);
+                yield return null;
+            }
+            transform.rotation = finalRotation;
+
+            Rigidbody bulletRb;
+            GameObject go = Instantiate(bullet, barrelMuzzle.position, Quaternion.identity, null);
+            if (go.TryGetComponent(out bulletRb))
+            {
+                bulletRb.AddForce(transform.forward * shotForce, ForceMode.Impulse);
+            }
         }
         yield return null;
     }

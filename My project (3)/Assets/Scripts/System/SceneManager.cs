@@ -12,6 +12,8 @@ public class SceneManager : MonoBehaviour
         GameOver
     }
 
+    float time;
+    float score;
     public bool gameWon;
     private void Awake()
     {
@@ -45,9 +47,11 @@ public class SceneManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene((int)gameScenes.Gameplay);
     }
-    void LoadGameOver(bool gameResult)
+    void LoadGameOver(bool gameResult, float achievedScore, float timeSpent)
     {
         gameWon = gameResult;
+        score = achievedScore;
+        time = timeSpent;
         UnityEngine.SceneManagement.SceneManager.LoadScene((int)gameScenes.GameOver);
     }
 }

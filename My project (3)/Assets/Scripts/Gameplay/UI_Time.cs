@@ -20,6 +20,6 @@ public class UI_Time : MonoBehaviour
 
     void UpdateTime(float newScore)
     {
-        textMesh.text = "Time: "+newScore.ToString();
+        textMesh.text = "Time: "+newScore.ToString("F2");
     }
 }

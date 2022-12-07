@@ -8,13 +8,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] float totalTime = 60;
     [SerializeField] float currentTime;
     [SerializeField] float score;
+    [SerializeField] int targetCounter;
 
     bool victory;
-    int targetCounter;
 
     public static Action<float> onTimeUpdate;
     public static Action<float> onScoreUpdate;
-    public static Action<bool> OnGameEnd;
+    public static Action<bool,float,float> OnGameEnd;
     private void OnEnable()
     {
         TargetHealth.onTargetSpawn += AddTarget;
@@ -39,12 +39,12 @@ public class GameManager : MonoBehaviour
         if(currentTime <= 0.0f)
         {
             victory = false;
-            OnGameEnd?.Invoke(victory);
+            OnGameEnd?.Invoke(victory,score, totalTime - currentTime);
         }
-        else if(targetCounter == 0)
+        else if(targetCounter <= 0)
         {
             victory = true;
-            OnGameEnd?.Invoke(victory);
+            OnGameEnd?.Invoke(victory, score, totalTime - currentTime);
         }
     }
 
