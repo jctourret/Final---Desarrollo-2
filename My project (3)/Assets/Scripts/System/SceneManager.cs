@@ -46,6 +46,7 @@ namespace TankGame
         }
         void LoadGameplay()
         {
+            Time.timeScale = 1.0f;
             UnityEngine.SceneManagement.SceneManager.LoadScene((int)gameScenes.Gameplay);
         }
         void LoadGameOver(bool gameResult, float achievedScore, float timeSpent)
