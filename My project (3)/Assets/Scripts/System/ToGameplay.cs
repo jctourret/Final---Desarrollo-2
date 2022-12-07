@@ -10,6 +10,7 @@ namespace TankGame
         public static Action onClick;
         private void Start()
         {
+
             playButton.onClick.AddListener(() => onClick?.Invoke());
         }
     }
