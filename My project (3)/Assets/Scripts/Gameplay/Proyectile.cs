@@ -4,8 +4,12 @@ public class Proyectile : MonoBehaviour
 {
     [SerializeField] int damage;
     [SerializeField] float lifeTime = 2.0f;
-
+    AudioSource source;
     float lifeTimer;
+    private void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
     private void Update()
     {
         if(lifeTimer< lifeTime)
@@ -23,7 +27,8 @@ public class Proyectile : MonoBehaviour
         if(collision.collider.TryGetComponent(out damageable))
         {
             damageable.TakeDamage(damage);
-            Destroy(gameObject);
+            source.Play();
+            Destroy(gameObject,source.clip.length);
         }
     }
 }

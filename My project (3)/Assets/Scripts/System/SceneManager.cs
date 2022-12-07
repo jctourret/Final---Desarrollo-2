@@ -12,8 +12,8 @@ public class SceneManager : MonoBehaviour
         GameOver
     }
 
-    float time;
-    float score;
+    public float time;
+    public float score;
     public bool gameWon;
     private void Awake()
     {

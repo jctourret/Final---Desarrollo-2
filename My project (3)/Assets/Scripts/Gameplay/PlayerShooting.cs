@@ -12,10 +12,12 @@ public class PlayerShooting : MonoBehaviour
     float turnTime = 0.2f;
     GameObject bullet;
     Camera mainCamera;
+    AudioSource source;
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = Camera.main;
+        source = GetComponent<AudioSource>();
         bullet = Resources.Load("Bullet") as GameObject;
     }
 
@@ -57,7 +59,7 @@ public class PlayerShooting : MonoBehaviour
                 yield return null;
             }
             transform.rotation = finalRotation;
-
+            source.Play();
             Rigidbody bulletRb;
             GameObject go = Instantiate(bullet, barrelMuzzle.position, Quaternion.identity, null);
             if (go.TryGetComponent(out bulletRb))

@@ -1,18 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]AudioMixer mixer;
+    float soundOn = 0f;
+    float soundOff = -80f;
+    public static AudioManager singleton;
+    private void Awake()
     {
-        
+        if (singleton == null)
+        {
+            singleton = this;
+            DontDestroyOnLoad(singleton.gameObject);
+        }
+        else if (singleton != gameObject)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        ToggleAudio.onClick += changeAudio;
+    }
+    private void OnDisable()
+    {
+        ToggleAudio.onClick -= changeAudio;
+    }
+
+    private void Start()
+    {
+        mixer.SetFloat("Volume", PlayerPrefs.GetFloat("Volume"));
+
+    }
+
+    void changeAudio()
+    {
+        mixer.GetFloat("Volumme", out float value);
+        if (value == soundOn)
+        {
+            mixer.SetFloat("Volume", soundOff);
+            PlayerPrefs.SetFloat("Volume", soundOff);
+        }
+        else
+        {
+            mixer.SetFloat("Volume", soundOn);
+            PlayerPrefs.SetFloat("Volume", soundOn);
+        }
     }
 }
