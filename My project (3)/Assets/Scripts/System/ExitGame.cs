@@ -14,7 +14,7 @@ namespace TankGame
 
         void QuitGame()
         {
-
+            Application.Quit();
         }
     }
 }
