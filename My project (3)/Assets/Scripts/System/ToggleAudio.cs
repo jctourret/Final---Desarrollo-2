@@ -1,14 +1,16 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class ToggleAudio : MonoBehaviour
+namespace TankGame
 {
-    [SerializeField] Button audioButton;
-
-    public static Action onClick;
-    private void Start()
+    public class ToggleAudio : MonoBehaviour
     {
-        audioButton.onClick.AddListener(() => onClick?.Invoke());
+        [SerializeField] Button audioButton;
+
+        public static Action onClick;
+        private void Start()
+        {
+            audioButton.onClick.AddListener(() => onClick?.Invoke());
+        }
     }
 }

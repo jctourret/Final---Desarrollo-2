@@ -1,14 +1,16 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class ToGameplay : MonoBehaviour
+namespace TankGame
 {
-    [SerializeField]Button playButton;
-
-    public static Action onClick;
-    private void Start()
+    public class ToGameplay : MonoBehaviour
     {
-        playButton.onClick.AddListener(() => onClick?.Invoke());
+        [SerializeField] Button playButton;
+
+        public static Action onClick;
+        private void Start()
+        {
+            playButton.onClick.AddListener(() => onClick?.Invoke());
+        }
     }
 }

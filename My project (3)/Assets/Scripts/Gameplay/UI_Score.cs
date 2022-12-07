@@ -1,25 +1,27 @@
 using TMPro;
 using UnityEngine;
-
-public class UI_Score : MonoBehaviour
+namespace TankGame
 {
-    TextMeshProUGUI textMesh;
-    private void Awake()
+    public class UI_Score : MonoBehaviour
     {
-        gameObject.TryGetComponent(out textMesh);
-    }
-    private void OnEnable()
-    {
-        GameManager.onScoreUpdate += UpdateScore;
-    }
+        TextMeshProUGUI textMesh;
+        private void Awake()
+        {
+            gameObject.TryGetComponent(out textMesh);
+        }
+        private void OnEnable()
+        {
+            GameManager.onScoreUpdate += UpdateScore;
+        }
 
-    private void OnDisable()
-    {
-        GameManager.onScoreUpdate -= UpdateScore;
-    }
-    
-    void UpdateScore(float newScore)
-    {
-        textMesh.text = "Score: " + newScore.ToString();
+        private void OnDisable()
+        {
+            GameManager.onScoreUpdate -= UpdateScore;
+        }
+
+        void UpdateScore(float newScore)
+        {
+            textMesh.text = "Score: " + newScore.ToString();
+        }
     }
 }

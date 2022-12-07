@@ -1,25 +1,27 @@
 using TMPro;
 using UnityEngine;
-
-public class UI_Time : MonoBehaviour
+namespace TankGame
 {
-    TextMeshProUGUI textMesh;
-    private void Awake()
+    public class UI_Time : MonoBehaviour
     {
-        gameObject.TryGetComponent(out textMesh);
-    }
-    private void OnEnable()
-    {
-        GameManager.onTimeUpdate += UpdateTime;
-    }
+        TextMeshProUGUI textMesh;
+        private void Awake()
+        {
+            gameObject.TryGetComponent(out textMesh);
+        }
+        private void OnEnable()
+        {
+            GameManager.onTimeUpdate += UpdateTime;
+        }
 
-    private void OnDisable()
-    {
-        GameManager.onTimeUpdate -= UpdateTime;
-    }
+        private void OnDisable()
+        {
+            GameManager.onTimeUpdate -= UpdateTime;
+        }
 
-    void UpdateTime(float newScore)
-    {
-        textMesh.text = "Time: "+newScore.ToString("F2");
+        void UpdateTime(float newScore)
+        {
+            textMesh.text = "Time: " + newScore.ToString("F2");
+        }
     }
 }

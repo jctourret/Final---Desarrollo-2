@@ -1,14 +1,16 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class ToMenu : MonoBehaviour
+namespace TankGame
 {
-    [SerializeField] Button menuButton;
-
-    public static Action onClick;
-    private void Start()
+    public class ToMenu : MonoBehaviour
     {
-        menuButton.onClick.AddListener(()=> onClick?.Invoke());
+        [SerializeField] Button menuButton;
+
+        public static Action onClick;
+        private void Start()
+        {
+            menuButton.onClick.AddListener(() => onClick?.Invoke());
+        }
     }
 }

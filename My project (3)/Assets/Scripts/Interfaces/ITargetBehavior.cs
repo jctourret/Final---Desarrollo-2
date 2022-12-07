@@ -1,4 +1,7 @@
-public interface ITargetBehavior
+namespace TankGame
 {
-    void move();
+    public interface ITargetBehavior
+    {
+        void move();
+    }
 }

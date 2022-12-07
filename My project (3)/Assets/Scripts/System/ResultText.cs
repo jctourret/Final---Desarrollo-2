@@ -1,19 +1,21 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
-public class ResultText : MonoBehaviour
+namespace TankGame
 {
-    TextMeshProUGUI textMesh;
-    private void Start()
+    public class ResultText : MonoBehaviour
     {
-        TryGetComponent(out textMesh);
-        if (SceneManager.singleton.gameWon)
+        TextMeshProUGUI textMesh;
+        private void Start()
         {
-            textMesh.text = "You win.";
-        }
-        else
-        {
-            textMesh.text = "You lose.";
+            TryGetComponent(out textMesh);
+            if (SceneManager.singleton.gameWon)
+            {
+                textMesh.text = "You win.";
+            }
+            else
+            {
+                textMesh.text = "You lose.";
+            }
         }
     }
 }

@@ -1,52 +1,54 @@
 using UnityEngine;
 using UnityEngine.Audio;
-
-public class AudioManager : MonoBehaviour
+namespace TankGame
 {
-    [SerializeField]AudioMixer mixer;
-    float soundOn = 0f;
-    float soundOff = -80f;
-    public static AudioManager singleton;
-    private void Awake()
+    public class AudioManager : MonoBehaviour
     {
-        if (singleton == null)
+        [SerializeField] AudioMixer mixer;
+        float soundOn = 0f;
+        float soundOff = -80f;
+        public static AudioManager singleton;
+        private void Awake()
         {
-            singleton = this;
-            DontDestroyOnLoad(singleton.gameObject);
+            if (singleton == null)
+            {
+                singleton = this;
+                DontDestroyOnLoad(singleton.gameObject);
+            }
+            else if (singleton != gameObject)
+            {
+                Destroy(gameObject);
+            }
         }
-        else if (singleton != gameObject)
+
+        private void OnEnable()
         {
-            Destroy(gameObject);
+            ToggleAudio.onClick += changeAudio;
         }
-    }
-
-    private void OnEnable()
-    {
-        ToggleAudio.onClick += changeAudio;
-    }
-    private void OnDisable()
-    {
-        ToggleAudio.onClick -= changeAudio;
-    }
-
-    private void Start()
-    {
-        mixer.SetFloat("Volume", PlayerPrefs.GetFloat("Volume"));
-
-    }
-
-    void changeAudio()
-    {
-        mixer.GetFloat("Volumme", out float value);
-        if (value == soundOn)
+        private void OnDisable()
         {
-            mixer.SetFloat("Volume", soundOff);
-            PlayerPrefs.SetFloat("Volume", soundOff);
+            ToggleAudio.onClick -= changeAudio;
         }
-        else
+
+        private void Start()
         {
-            mixer.SetFloat("Volume", soundOn);
-            PlayerPrefs.SetFloat("Volume", soundOn);
+            mixer.SetFloat("Volume", PlayerPrefs.GetFloat("Volume"));
+
+        }
+
+        void changeAudio()
+        {
+            mixer.GetFloat("Volume", out float value);
+            if (value == soundOn)
+            {
+                mixer.SetFloat("Volume", soundOff);
+                PlayerPrefs.SetFloat("Volume", soundOff);
+            }
+            else
+            {
+                mixer.SetFloat("Volume", soundOn);
+                PlayerPrefs.SetFloat("Volume", soundOn);
+            }
         }
     }
 }

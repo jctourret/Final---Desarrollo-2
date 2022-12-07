@@ -1,32 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class TargetMovement : MonoBehaviour
+namespace TankGame
 {
-    enum Behaviors
+    public class TargetMovement : MonoBehaviour
     {
-        Chaser,
-        Jumper
-    }
-    [SerializeField] ITargetBehavior currentBehavior;
-    [SerializeField] Transform target;
-    [SerializeField] TargetAttributes attributes;
-    private void Start()
-    {
-        float selectedBehaviour = Random.Range((float)Behaviors.Chaser,(float)Behaviors.Jumper);
-        selectedBehaviour = Mathf.RoundToInt(selectedBehaviour);
-        if(selectedBehaviour == (int)Behaviors.Chaser)
+        enum Behaviors
         {
-            currentBehavior = new Chaser(attributes.speed,target,transform);
+            Chaser,
+            Jumper
         }
-        else
+        [SerializeField] ITargetBehavior currentBehavior;
+        [SerializeField] Transform target;
+        [SerializeField] TargetAttributes attributes;
+        private void Start()
         {
-            currentBehavior = new Jumper(GetComponent<CharacterController>());
+            float selectedBehaviour = Random.Range((float)Behaviors.Chaser, (float)Behaviors.Jumper);
+            selectedBehaviour = Mathf.RoundToInt(selectedBehaviour);
+            if (selectedBehaviour == (int)Behaviors.Chaser)
+            {
+                currentBehavior = new Chaser(attributes.speed, target, transform);
+            }
+            else
+            {
+                currentBehavior = new Jumper(GetComponent<CharacterController>());
+            }
         }
-    }
-    private void Update()
-    {
-        currentBehavior.move();
+        private void Update()
+        {
+            currentBehavior.move();
+        }
     }
 }

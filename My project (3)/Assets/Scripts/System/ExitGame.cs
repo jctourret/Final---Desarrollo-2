@@ -1,12 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
-
-public class ExitGame : MonoBehaviour
+namespace TankGame
 {
-    [SerializeField] Button playButton;
-
-    private void Start()
+    public class ExitGame : MonoBehaviour
     {
-        playButton.onClick.AddListener(() => Application.Quit());
+        [SerializeField] Button playButton;
+        AudioSource source;
+        private void Start()
+        {
+            source = GetComponent<AudioSource>();
+            playButton.onClick.AddListener(() => { Invoke("QuitGame", source.clip.length);source.Play();}) ;
+        }
+
+        void QuitGame()
+        {
+
+        }
     }
 }

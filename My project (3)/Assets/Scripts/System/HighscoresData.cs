@@ -1,13 +1,16 @@
-[System.Serializable]
-public class HighscoresData
+namespace TankGame
 {
-    public int[] scores;
-    public HighscoresData()
+    [System.Serializable]
+    public class HighscoresData
     {
-        scores = new int[3];
-        for(int i = 0; i < scores.Length; i++)
+        public int[] scores;
+        public HighscoresData()
         {
-            scores[i] = 0;
+            scores = new int[3];
+            for (int i = 0; i < scores.Length; i++)
+            {
+                scores[i] = 0;
+            }
         }
     }
 }

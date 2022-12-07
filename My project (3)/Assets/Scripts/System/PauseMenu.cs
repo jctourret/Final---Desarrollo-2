@@ -1,21 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class PauseMenu : MonoBehaviour
+namespace TankGame
 {
-    bool pause = false;
-    public void OnPauseClick()
+    public class PauseMenu : MonoBehaviour
     {
-        pause = !pause;
-        gameObject.SetActive(pause);
-        if (gameObject.activeSelf)
+        bool pause = false;
+        public void OnPauseClick()
         {
-            Time.timeScale = 0.0f;
-        }
-        else
-        {
-            Time.timeScale = 1.0f;
+            pause = !pause;
+            gameObject.SetActive(pause);
+            if (gameObject.activeSelf)
+            {
+                Time.timeScale = 0.0f;
+            }
+            else
+            {
+                Time.timeScale = 1.0f;
+            }
         }
     }
 }
