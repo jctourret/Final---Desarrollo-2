@@ -23,7 +23,7 @@ public class Proyectile : MonoBehaviour
         if(collision.collider.TryGetComponent(out damageable))
         {
             damageable.TakeDamage(damage);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }
